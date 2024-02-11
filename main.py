@@ -11,22 +11,28 @@ if __name__ == "__main__":
     end_date = input("Please input end date (YYYY-MM-DD): ")
     print("")
 
-
+    # Gets the latitude and longitude of the user inputted address
     input_lat, input_lon = map_generator.get_location(address)
 
+    # Uses user inputted address to return nearby cities
     nearbyCities = NearbyCities()
     nearby_data = nearbyCities.get_nearby_cities_geonames(input_lat, input_lon)
 
+    # Parses through the nearby cities
     data = []
     for key, coords in nearby_data.items():
         address = f"{coords[0]}, {coords[1]}"
 
+        # Passes the list of nearby cities to the Historical Weather API
         weather_fetcher = WeatherDataFetcher()
         responses = weather_fetcher.fetch_weather_data(coords[0], coords[1], start_date, end_date)
 
+        # Makes the returned data usable
         for response in responses:
             response_dataframe = weather_fetcher.process_weather_data(response)
 
+            # Makes sure the data hasn't already been added, as sometimes the weather data returned will be for the
+            # same spot if locations are too close
             if [response_dataframe[0], response_dataframe[1], response_dataframe[2]] in data:
                 print(response_dataframe[0], response_dataframe[1], response_dataframe[2], 'Already Processed')
             else:

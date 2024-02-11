@@ -9,6 +9,7 @@ class WeatherDataFetcher:
         self.retry_session = retry(self.cache_session, retries=5, backoff_factor=0.2)
         self.openmeteo = openmeteo_requests.Client(session=self.retry_session)
 
+    # Takes the given information and returns the corresponding weather data
     def fetch_weather_data(self, latitude, longitude, start_date, end_date):
         url = "https://archive-api.open-meteo.com/v1/archive"
         params = {
@@ -24,6 +25,7 @@ class WeatherDataFetcher:
         }
         return self.openmeteo.weather_api(url, params=params)
 
+    # Takes the given weather data and parses it, so it can be used
     def process_weather_data(self, response):
         latitude = np.float_(response.Latitude())
         longitude = np.float_(response.Longitude())

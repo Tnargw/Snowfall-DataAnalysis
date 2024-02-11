@@ -8,10 +8,12 @@ class MapGenerator:
     def __init__(self):
         self.geolocator = Nominatim(user_agent="map_generator")
 
+    # Returns the latitude and longitude of any address
     def get_location(self, address):
         location = self.geolocator.geocode(address)
         return location.latitude, location.longitude
 
+    # Returns a folium map
     def get_map(self, address):
         location = self.geolocator.geocode(address)
         if location:
@@ -21,6 +23,7 @@ class MapGenerator:
             print("Couldn't find the location.")
             return None
 
+    # Adds a heatmap to a given map
     def add_heat_map(self, m, data):
 
         heat_map = HeatMap(data,
@@ -31,11 +34,13 @@ class MapGenerator:
         heat_map.add_to(m)
         m.save("map.html")
 
+    # Saves the map so it can be viewed
     def save_map(self, address):
         m = self.get_map(address)
         if m:
             m.save("map.html")
 
+    # Opens a given map in a web browser
     def open_map(self, m):
         if m:
             webbrowser.open("map.html")

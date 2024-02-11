@@ -5,6 +5,7 @@ class NearbyCities:
         self.radius = radius
         self.max_results = max_results
 
+    # Takes a given starting point and returns a list of nearby cities
     def get_nearby_cities_geonames(self, latitude, longitude):
         try:
             username = 'tnargw'
