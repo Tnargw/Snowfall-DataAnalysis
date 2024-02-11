@@ -6,9 +6,8 @@ This program utilizes data from Open-Meteo's Historical Weather Api to return in
 My purpose in making this program was simply that I was curious to see how snowfall varies between areas over a long period of time.
 I decided to have the information shown on a map both to make it easier to see and understand.
 
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the data set, the questions and answers, the code running and a walkthrough of the code.}
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/YkTyFpNJTIU)
 
 # Data Analysis Results
 
@@ -26,6 +25,12 @@ Geonames: This api will return cities near a given latitude and longitude.
 Folium: This api takes the given set of coordinates and data and generates the .html map to be shown with the heatmap showing snowfall amount.
 
 {Describe the programming language that you used and any libraries.}
+This program was mode using python, and requires the following libraries.
+ - Geopy
+ - Folium
+ - openmeteo-requests
+ - requests-cache
+ - retry-requests
 
 # Useful Websites
 
